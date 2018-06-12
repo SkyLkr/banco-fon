@@ -1,6 +1,6 @@
 package negocio;
 
-public class Usuario {
+public abstract class Usuario {
 
 	private String nome;
 	private String cpf;

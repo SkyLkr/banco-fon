@@ -6,5 +6,7 @@ public class Gerente extends Usuario{
 		super(nome, cpf);
 		// TODO Auto-generated constructor stub
 	}
-
+	//cadastrar usuario(gerente ou cliente), gerenciar_usuario  e remover_usuario
+	
+	
 }

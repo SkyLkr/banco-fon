@@ -1,7 +1,9 @@
 package negocio;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 
+import exceptions.DesempregadoException;
 import exceptions.SaldoInsuficienteException;
 
 public class ContaCorrente extends Conta {
@@ -10,7 +12,7 @@ public class ContaCorrente extends Conta {
 		super(titular);
 	}
 	
-	public void transferir(BigDecimal valor, Conta destino) throws SaldoInsuficienteException {
+	public void transferencia(BigDecimal valor, Conta destino) throws SaldoInsuficienteException {
 		try {
 			this.retirar(valor);
 		} catch (SaldoInsuficienteException e) {
@@ -18,6 +20,21 @@ public class ContaCorrente extends Conta {
 		}
 		destino.deposito(valor);
 	}
-	//desconto menssal de 0,1%
+	
+	public void realizarEmprestimo(BigDecimal valor)  throws DesempregadoException {
+		ArrayList<Conta> contasDoCliente = this.getTitular().getContas();
+		ContaSalario cs = null;
+		for (Conta conta : contasDoCliente) {
+			if (conta instanceof ContaSalario) {
+				cs = (ContaSalario) conta;
+				break;
+			}
+		}
+		if (cs != null) {
+			cs.setEmprestimoDevido(valor);
+		} else {
+			throw new DesempregadoException("Esta conta não possui conta salário associada.");
+		}
+	}
 	
 }

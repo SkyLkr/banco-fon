@@ -9,7 +9,7 @@ import exceptions.SaldoInsuficienteException;
  * @author Adriano
  *
  */
-public class Conta {
+public abstract class Conta {
 	
 	private Cliente titular;
 	private BigDecimal saldo;
@@ -24,6 +24,7 @@ public class Conta {
 	public Conta(Cliente titular) {
 		this.titular = titular;
 		this.saldo = new BigDecimal(0);
+		this.titular.getContas().add(this);//Adicionar a conta que esta sendo criada ao arraylist de contas do titular
 	}
 	
 	protected void retirar(BigDecimal valor) throws SaldoInsuficienteException {

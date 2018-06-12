@@ -1,5 +1,7 @@
 package negocio;
 
+import java.util.ArrayList;
+
 /**
  * 
  * 
@@ -8,9 +10,14 @@ package negocio;
  */
 public class Cliente extends Usuario{
 
+	ArrayList<Conta> contas;//ArrayList com todas as contasdo cliente
+	
 	public Cliente(String nome, String cpf) {
 		super(nome, cpf);
-		// TODO Auto-generated constructor stub
+		contas = new ArrayList<>();
 	}
 	
+	public ArrayList<Conta> getContas() {
+		return contas;
+	}
 }

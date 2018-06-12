@@ -23,7 +23,7 @@ public class Main {
 			throw new OpcaoInvalidaException();
 		}
 		if (num == 1) {
-			dope
+			
 		} else if (num == 2) {
 			
 		} else {

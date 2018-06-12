@@ -6,6 +6,6 @@ public class ContaSalario extends Conta {
 		super(titular);
 	}
 	
-	
+	//deposito e transferencia para conta corrente
 	
 }

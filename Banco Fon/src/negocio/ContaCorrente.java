@@ -18,6 +18,6 @@ public class ContaCorrente extends Conta {
 		}
 		destino.deposito(valor);
 	}
-	
+	//desconto menssal de 0,1%
 	
 }

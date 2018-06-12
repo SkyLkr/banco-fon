@@ -37,4 +37,6 @@ public class Conta {
 	public void deposito(BigDecimal valor) {
 		this.saldo = this.saldo.add(valor);
 	}
+	
+	//Empretimo consignado somente se possuir conta salario
 }

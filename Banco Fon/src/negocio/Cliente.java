@@ -1,31 +1,23 @@
 package negocio;
 
+import java.util.ArrayList;
+
 /**
  * 
  * 
  * @author Adriano
  * 
  */
-public class Cliente {
+public class Cliente extends Usuario{
+
+	ArrayList<Conta> contas;//ArrayList com todas as contasdo cliente
 	
-	private String nome;
-	private String cpf;
-	
-	public String getNome() {
-		return nome;
-	}
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-	public String getCpf() {
-		return cpf;
-	}
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
+	public Cliente(String nome, String cpf, String endereco, String telefone) {
+		super(nome, cpf, endereco, telefone);
+		contas = new ArrayList<>();
 	}
 	
-	public Cliente(String nome, String cpf) {
-		this.nome = nome;
-		this.cpf = cpf;
+	public ArrayList<Conta> getContas() {
+		return contas;
 	}
 }

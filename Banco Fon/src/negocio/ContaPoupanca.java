@@ -6,8 +6,8 @@ import exceptions.SaldoInsuficienteException;
 
 public class ContaPoupanca extends Conta {
 
-	public ContaPoupanca(Cliente titular) {
-		super(titular);
+	public ContaPoupanca(Cliente titular, String numero, String senha) {
+		super(titular, numero, senha);
 		// TODO Auto-generated constructor stub
 	}
 	

@@ -4,41 +4,23 @@ public abstract class Usuario {
 
 	private String nome;
 	private String cpf;
-	private String Endereco;
-	private String NumeroConta;
-	private String Senha;
-	private String Telefone;
+	private String endereco;
+	private String telefone;
 	
 	public String getEndereco() {
-		return Endereco;
+		return endereco;
 	}
 	
 	public void setEndereco(String endereco) {
-		Endereco = endereco;
-	}
-	
-	public String getNumeroConta() {
-		return NumeroConta;
-	}
-	
-	public void setNumeroConta(String numeroConta) {
-		NumeroConta = numeroConta;
-	}
-	
-	public String getSenha() {
-		return Senha;
-	}
-	
-	public void setSenha(String senha) {
-		Senha = senha;
+		this.endereco = endereco;
 	}
 	
 	public String getTelefone() {
-		return Telefone;
+		return telefone;
 	}
 	
 	public void setTelefone(String telefone) {
-		Telefone = telefone;
+		this.telefone = telefone;
 	}
 	
 	public String getNome() {
@@ -56,9 +38,11 @@ public abstract class Usuario {
 		this.cpf = cpf;
 	}
 	
-	public Usuario(String nome, String cpf) {
+	public Usuario(String nome, String cpf, String endereco, String telefone) {
 		this.nome = nome;
 		this.cpf = cpf;
+		this.telefone = telefone;
+		this.endereco = endereco;
 	}
 	
 }

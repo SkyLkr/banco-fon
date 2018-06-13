@@ -8,8 +8,8 @@ public class ContaSalario extends Conta {
 	
 	private BigDecimal emprestimoDevido;
 
-	public ContaSalario(Cliente titular) {
-		super(titular);
+	public ContaSalario(Cliente titular, String numero, String senha) {
+		super(titular, numero, senha);
 		emprestimoDevido = new BigDecimal(0);
 	}
 	

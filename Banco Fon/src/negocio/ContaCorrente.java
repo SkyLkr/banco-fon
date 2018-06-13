@@ -8,8 +8,8 @@ import exceptions.SaldoInsuficienteException;
 
 public class ContaCorrente extends Conta {
 
-	public ContaCorrente(Cliente titular) {
-		super(titular);
+	public ContaCorrente(Cliente titular, String numero, String senha) {
+		super(titular, numero, senha);
 	}
 	
 	public void transferencia(BigDecimal valor, Conta destino) throws SaldoInsuficienteException {
@@ -36,5 +36,4 @@ public class ContaCorrente extends Conta {
 			throw new DesempregadoException("Esta conta não possui conta salário associada.");
 		}
 	}
-	
 }

@@ -114,7 +114,7 @@ public class Main {
 			String opcao = scanner.nextLine();
 			
 			if (opcao.equals("1")) {
-				System.out.println("Saldo na conta: " + conta.getSaldo());
+				System.out.println("Saldo na conta: " + conta.getSaldo().toString());
 				if (conta instanceof ContaPoupanca) {
 					ContaPoupanca poupanca = (ContaPoupanca) conta;
 					System.out.println("Saldo após rendimento mensal: " + poupanca.calculaRendimento());
@@ -191,6 +191,8 @@ public class Main {
 						errou = true;
 					}
 				} while (errou);
+				
+				System.err.println("Transferindo " + valor.getMoeda() + " para " + destino.getSaldo().getMoeda());
 				
 				if (conta instanceof ContaSalario) {
 					if (destino instanceof ContaCorrente) {
@@ -380,6 +382,8 @@ public class Main {
 							break;
 						} else if (!cpf.equals("0")) {
 							System.out.println("Esse usuário não existe. Tente novamente.");
+						} else {
+							break;
 						}
 					}
 					

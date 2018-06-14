@@ -1,8 +1,9 @@
 package cambio;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public enum Moedas {
+public enum Moedas implements Serializable{
 	REAL ("R$", 1),
 	DOLAR ("US$", 3.7);
 	

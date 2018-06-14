@@ -12,22 +12,22 @@ public class Dinheiro implements Serializable {
 	
 	public Dinheiro() {
 		valor = new BigDecimal(0);
-		moeda = Moedas.REAL;
+		moeda = MOEDA;
 	}
 	
 	public Dinheiro(BigDecimal valor) {
 		this.valor = valor;
-		this.moeda = Moedas.REAL;
+		this.moeda = MOEDA;
 	}
 	
 	public Dinheiro(String valor) {
 		this.valor = new BigDecimal(valor);
-		this.moeda = Moedas.REAL;
+		this.moeda = MOEDA;
 	}
 	
 	public Dinheiro(double valor) {
 		this.valor = new BigDecimal(valor);
-		this.moeda = Moedas.REAL;
+		this.moeda = MOEDA;
 	}
 	
 	public Dinheiro(Moedas moeda) {
@@ -50,12 +50,12 @@ public class Dinheiro implements Serializable {
 		this.moeda = moeda;
 	}
 	
-	public void setMoeda(Moedas moeda) {
-		if (this.moeda.preco.compareTo(moeda.preco) == -1)
-			valor = valor.multiply(moeda.preco);
-		else if (this.moeda.preco.compareTo(moeda.preco) == 1)
-			valor = valor.divide(moeda.preco);
-		this.moeda = moeda;
+	public void setMoeda(Moedas novaMoeda) {
+		if (this.moeda.preco.compareTo(novaMoeda.preco) == -1)
+			valor = valor.divide(novaMoeda.preco, 2, BigDecimal.ROUND_HALF_DOWN);
+		else
+			valor = valor.multiply(this.moeda.preco);
+		this.moeda = novaMoeda;
 	}
 	
 	public Moedas getMoeda() {
@@ -78,6 +78,7 @@ public class Dinheiro implements Serializable {
 	
 	public Dinheiro add(Dinheiro other) {
 		Moedas temp = other.getMoeda();
+		System.err.println("Somando " + this.getMoeda() + " com " + other.getMoeda());
 		other.setMoeda(this.getMoeda());
 		Dinheiro novo = new Dinheiro(this.getValor().add(other.getValor()), this.getMoeda());
 		
@@ -98,12 +99,12 @@ public class Dinheiro implements Serializable {
 	
 	@Override
 	public String toString() {
-		Moedas temp = moeda;
-		if (moeda != MOEDA) {
+		/*Moedas temp = this.moeda;
+		if (this.moeda != MOEDA) {
 			setMoeda(MOEDA);
-		}
-		String r = moeda.simbolo + valor.toString();
-		setMoeda(temp);
+		}*/
+		String r = this.moeda.simbolo + String.format("%.2f", valor.doubleValue());
+		//setMoeda(temp);
 		
 		return r;
 	}

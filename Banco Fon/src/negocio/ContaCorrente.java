@@ -1,18 +1,28 @@
 package negocio;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 
-import exceptions.DesempregadoException;
+import cambio.Dinheiro;
 import exceptions.SaldoInsuficienteException;
+import negocio.interfaces.Sacavel;
 
-public class ContaCorrente extends Conta {
-
+/**
+ * Conta Corrente
+ * 
+ */
+public class ContaCorrente extends Conta implements Sacavel {
+	
+	/**
+	 * 
+	 * @param titular Titular da conta.
+	 * @param numero Número da conta.
+	 * @param senha Senha da conta.
+	 */
 	public ContaCorrente(Cliente titular, String numero, String senha) {
 		super(titular, numero, senha);
 	}
 	
-	public void transferencia(BigDecimal valor, Conta destino) throws SaldoInsuficienteException {
+	public void transferencia(Dinheiro valor, Conta destino) throws SaldoInsuficienteException {
 		try {
 			this.retirar(valor);
 		} catch (SaldoInsuficienteException e) {
@@ -20,20 +30,9 @@ public class ContaCorrente extends Conta {
 		}
 		destino.deposito(valor);
 	}
-	
-	public void realizarEmprestimo(BigDecimal valor)  throws DesempregadoException {
-		ArrayList<Conta> contasDoCliente = this.getTitular().getContas();
-		ContaSalario cs = null;
-		for (Conta conta : contasDoCliente) {
-			if (conta instanceof ContaSalario) {
-				cs = (ContaSalario) conta;
-				break;
-			}
-		}
-		if (cs != null) {
-			cs.setEmprestimoDevido(valor);
-		} else {
-			throw new DesempregadoException("Esta conta não possui conta salário associada.");
-		}
+
+	@Override
+	public void saque(Dinheiro valor) throws SaldoInsuficienteException {
+		retirar(valor);
 	}
 }

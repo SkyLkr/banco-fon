@@ -1,9 +1,9 @@
 package exceptions;
 
 /**
+ * Lançada quando tenta-se realizar uma operação de saque/transferencia de um valor mais alto
+ * que o saldo da conta.
  * 
- * @author Adriano
- *
  */
 public class SaldoInsuficienteException extends Exception {
 	/**

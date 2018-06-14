@@ -6,6 +6,10 @@ import java.util.HashMap;
 import negocio.Conta;
 import negocio.Usuario;
 
+/**
+ * Classe que armazena os hashmaps de usuários e contas
+ * 
+ */
 public class Dados implements Serializable {
 	/**
 	 * 
@@ -14,6 +18,9 @@ public class Dados implements Serializable {
 	private HashMap<String, Usuario> usuarios;
 	private HashMap<String, Conta> contas;
 	
+	/**
+	 * Constrói o objeto com ambos os hashmaps vazios.
+	 */
 	public Dados() {
 		usuarios = new HashMap<>();
 		contas = new HashMap<>();

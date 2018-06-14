@@ -1,7 +1,17 @@
 package negocio;
 
-public abstract class Usuario {
+import java.io.Serializable;
 
+/**
+ * Usuário do Sistema
+ * 
+ */
+public abstract class Usuario implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6301136832903229587L;
 	private String nome;
 	private String cpf;
 	private String endereco;
@@ -38,6 +48,13 @@ public abstract class Usuario {
 		this.cpf = cpf;
 	}
 	
+	/**
+	 * 
+	 * @param nome Nome do usuário
+	 * @param cpf CPF do usuário
+	 * @param endereco Endereço do usuário
+	 * @param telefone Telefone do usuário
+	 */
 	public Usuario(String nome, String cpf, String endereco, String telefone) {
 		this.nome = nome;
 		this.cpf = cpf;

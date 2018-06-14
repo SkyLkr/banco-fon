@@ -3,6 +3,7 @@ package negocio;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
+import cambio.Dinheiro;
 import exceptions.DesempregadoException;
 import exceptions.JaPossuiEmprestimoException;
 
@@ -13,7 +14,7 @@ import exceptions.JaPossuiEmprestimoException;
 public class Cliente extends Usuario{
 
 	private ArrayList<Conta> contas;//ArrayList com todas as contas do cliente
-	private BigDecimal emprestimoDevido;
+	private Dinheiro emprestimoDevido;
 	
 	/**
 	 * 
@@ -25,7 +26,7 @@ public class Cliente extends Usuario{
 	public Cliente(String nome, String cpf, String endereco, String telefone) {
 		super(nome, cpf, endereco, telefone);
 		contas = new ArrayList<>();
-		emprestimoDevido = new BigDecimal(0);
+		emprestimoDevido = new Dinheiro();
 	}
 	
 	public ArrayList<Conta> getContas() {
@@ -37,8 +38,8 @@ public class Cliente extends Usuario{
 	 * @param valor Valor do emprestimo.
 	 * @throws JaPossuiEmprestimoException Caso o cliente já possua um emprestimo não consignado em aberto.
 	 */
-	public void realizarEmprestimoNaoConsignado(BigDecimal valor) throws JaPossuiEmprestimoException {
-		if (emprestimoDevido.compareTo(new BigDecimal(0)) == 0)
+	public void realizarEmprestimoNaoConsignado(Dinheiro valor) throws JaPossuiEmprestimoException {
+		if (emprestimoDevido.compareTo(new Dinheiro()) == 0)
 			emprestimoDevido = valor;
 		else
 			throw new JaPossuiEmprestimoException();
@@ -50,7 +51,7 @@ public class Cliente extends Usuario{
 	 * @throws DesempregadoException Caso o cliente não possua conta salário associada.
 	 * @throws JaPossuiEmprestimoException Caso o cliente já possua um emprestimo consignado em aberto.
 	 */
-	public void realizarEmprestimoConsignado(BigDecimal valor)  throws DesempregadoException, JaPossuiEmprestimoException {
+	public void realizarEmprestimoConsignado(Dinheiro valor)  throws DesempregadoException, JaPossuiEmprestimoException {
 		ContaSalario cs = null;
 		for (Conta conta : contas) {
 			if (conta instanceof ContaSalario) {
@@ -59,7 +60,7 @@ public class Cliente extends Usuario{
 			}
 		}
 		if (cs != null) {
-			if (cs.getEmprestimoDevido().compareTo(new BigDecimal(0)) == 0)
+			if (cs.getEmprestimoDevido().compareTo(new Dinheiro()) == 0)
 				cs.setEmprestimoDevido(valor);
 			else
 				throw new JaPossuiEmprestimoException();

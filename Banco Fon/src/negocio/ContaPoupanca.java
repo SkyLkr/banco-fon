@@ -32,11 +32,7 @@ public class ContaPoupanca extends Conta implements Sacavel {
 	}
 
 	public void transferencia(Dinheiro valor, Conta destino) throws SaldoInsuficienteException {
-		try {
-			this.retirar(valor);
-		} catch (SaldoInsuficienteException e) {
-			throw e;
-		}
+		this.retirar(valor);
 		destino.deposito(valor);
 	}
 

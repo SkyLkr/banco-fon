@@ -16,17 +16,17 @@ public class Dinheiro implements Serializable {
 	}
 	
 	public Dinheiro(BigDecimal valor) {
-		this.valor = valor;
+		this.valor = valor.abs();
 		this.moeda = MOEDA;
 	}
 	
 	public Dinheiro(String valor) {
-		this.valor = new BigDecimal(valor);
+		this.valor = (new BigDecimal(valor)).abs();
 		this.moeda = MOEDA;
 	}
 	
 	public Dinheiro(double valor) {
-		this.valor = new BigDecimal(valor);
+		this.valor = (new BigDecimal(valor)).abs();
 		this.moeda = MOEDA;
 	}
 	
@@ -36,17 +36,17 @@ public class Dinheiro implements Serializable {
 	}
 	
 	public Dinheiro(BigDecimal valor, Moedas moeda) {
-		this.valor = valor;
+		this.valor = valor.abs();
 		this.moeda = moeda;
 	}
 	
 	public Dinheiro(String valor, Moedas moeda) {
-		this.valor = new BigDecimal(valor);
+		this.valor = (new BigDecimal(valor)).abs();
 		this.moeda = moeda;
 	}
 	
 	public Dinheiro(double valor, Moedas moeda) {
-		this.valor = new BigDecimal(valor);
+		this.valor = (new BigDecimal(valor)).abs();
 		this.moeda = moeda;
 	}
 	

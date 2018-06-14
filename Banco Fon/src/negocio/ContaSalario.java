@@ -11,7 +11,7 @@ import exceptions.SaldoInsuficienteException;
  */
 public class ContaSalario extends Conta {
 	
-	private BigDecimal emprestimoDevido;
+	private Dinheiro emprestimoDevido;
 
 	/**
 	 * 
@@ -21,14 +21,14 @@ public class ContaSalario extends Conta {
 	 */
 	public ContaSalario(Cliente titular, String numero, String senha) {
 		super(titular, numero, senha);
-		emprestimoDevido = new BigDecimal(0);
+		emprestimoDevido = new Dinheiro();
 	}
 	
-	public BigDecimal getEmprestimoDevido() {
+	public Dinheiro getEmprestimoDevido() {
 		return emprestimoDevido;
 	}
 	
-	public void setEmprestimoDevido(BigDecimal valor) {
+	public void setEmprestimoDevido(Dinheiro valor) {
 		this.emprestimoDevido = valor;
 	}
 	
@@ -41,12 +41,7 @@ public class ContaSalario extends Conta {
 	 * @throws SaldoInsuficienteException Caso o saldo da conta de origem seja menor que o valor a ser transferido.
 	 */
 	public void transferencia(Dinheiro valor, ContaCorrente destino) throws SaldoInsuficienteException {
-		try {
-			this.retirar(valor);
-		} catch(SaldoInsuficienteException e) {
-			throw e;
-		}
-		
+		this.retirar(valor);
 		destino.deposito(valor);
 	}
 }

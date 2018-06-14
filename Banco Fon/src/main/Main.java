@@ -1,6 +1,5 @@
 package main;
 
-import java.math.BigDecimal;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -46,22 +45,6 @@ public class Main {
 			temArquivo = true;
 		}
 		
-		do {
-			System.out.println("Selecionar Moeda: ");
-			System.out.println("[1] Real");
-			System.out.println("[2] Dólar");
-			String o = scanner.nextLine();
-			if (o.equals("1")) {
-				Dinheiro.MOEDA = Moedas.REAL;
-				break;
-			} else if (o.equals("2")) {
-				Dinheiro.MOEDA = Moedas.DOLAR;
-				break;
-			} else {
-				System.out.println("Opção Inválida");
-			}
-		} while (true);
-		
 		if (args.length > 0 && args[0].compareToIgnoreCase("admin") == 0) {
 			try {
 				if (!temArquivo) {
@@ -69,6 +52,8 @@ public class Main {
 					System.out.println("Cadastrar um gerente: ");
 					cadastrarGerente();
 					AcessadorDeArquivo.gravarArquivo(d, CAMINHO_DO_ARQUIVO);
+					System.out.println("Gerente cadastrado com sucesso");
+					scanner.nextLine();
 					Utilidades.limparTela();
 				}
 				loginGerente();
@@ -122,13 +107,31 @@ public class Main {
 				scanner.nextLine();
 				Utilidades.limparTela();
 			} else if (opcao.equals("2")) {
+				Moedas moeda = null;
+				do {
+					System.out.println("Selecionar Moeda: ");
+					System.out.println("[1] Real");
+					System.out.println("[2] Dólar");
+					String o = scanner.nextLine();
+					if (o.equals("1")) {
+						moeda = Moedas.REAL;
+						break;
+					} else if (o.equals("2")) {
+						moeda = Moedas.DOLAR;
+						break;
+					} else {
+						System.out.println("Opção Inválida");
+					}
+				} while (true);
+				
+				
 				boolean errou = false; 
-				Dinheiro valor = new Dinheiro(Dinheiro.MOEDA);
+				Dinheiro valor = new Dinheiro(moeda);
 				do {
 					System.out.println("Valor do depósito: ");
 					String entrada = scanner.nextLine();
 					try {
-						valor = new Dinheiro(entrada, Dinheiro.MOEDA);
+						valor = new Dinheiro(entrada, moeda);
 						errou = false;
 					} catch (NumberFormatException e) {
 						System.out.println("Valor inválido.");
@@ -142,14 +145,31 @@ public class Main {
 				
 			} else if (opcao.equals("3")) {
 				if (conta instanceof Sacavel) {
-				
+					
+					Moedas moeda = null;
+					do {
+						System.out.println("Selecionar Moeda: ");
+						System.out.println("[1] Real");
+						System.out.println("[2] Dólar");
+						String o = scanner.nextLine();
+						if (o.equals("1")) {
+							moeda = Moedas.REAL;
+							break;
+						} else if (o.equals("2")) {
+							moeda = Moedas.DOLAR;
+							break;
+						} else {
+							System.out.println("Opção Inválida");
+						}
+					} while (true);
+					
 					boolean errou = false; 
-					Dinheiro valor = new Dinheiro(Dinheiro.MOEDA);
+					Dinheiro valor = new Dinheiro(moeda);
 					do {
 						System.out.println("Valor: ");
 						String entrada = scanner.nextLine();
 						try {
-							valor = new Dinheiro(entrada, Dinheiro.MOEDA);
+							valor = new Dinheiro(entrada, moeda);
 							errou = false;
 						} catch (NumberFormatException e) {
 							System.out.println("Valor inválido.");
@@ -192,8 +212,6 @@ public class Main {
 					}
 				} while (errou);
 				
-				System.err.println("Transferindo " + valor.getMoeda() + " para " + destino.getSaldo().getMoeda());
-				
 				if (conta instanceof ContaSalario) {
 					if (destino instanceof ContaCorrente) {
 						ContaSalario cs = (ContaSalario) conta;
@@ -214,12 +232,12 @@ public class Main {
 				
 			} else if (opcao.equals("5")) {
 				boolean errou = false; 
-				BigDecimal valor = new BigDecimal(0);
+				Dinheiro valor = new Dinheiro();
 				do {
 					System.out.println("Valor: ");
 					String entrada = scanner.nextLine();
 					try {
-						valor = new BigDecimal(entrada);
+						valor = new Dinheiro(entrada);
 						errou = false;
 					} catch (NumberFormatException e) {
 						System.out.println("Valor inválido.");
@@ -235,12 +253,12 @@ public class Main {
 				
 			} else if (opcao.equals("6")) {
 				boolean errou = false; 
-				BigDecimal valor = new BigDecimal(0);
+				Dinheiro valor = new Dinheiro();
 				do {
 					System.out.println("Valor do depósito: ");
 					String entrada = scanner.nextLine();
 					try {
-						valor = new BigDecimal(entrada);
+						valor = new Dinheiro(entrada);
 						errou = false;
 					} catch (NumberFormatException e) {
 						System.out.println("Valor inválido.");
@@ -319,8 +337,8 @@ public class Main {
 							while(true) {
 								System.out.println("[1] Atualizar Dados");
 								System.out.println("[2] Remover usuário");
-								System.out.println("[0] Voltar");
 								if (usr instanceof Cliente) System.out.println("[3] Gerenciar contas");
+								System.out.println("[0] Voltar");
 								String op = scanner.nextLine();
 								if (op.equals("1")) {
 									atualizaUsuario(usr);
